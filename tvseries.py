@@ -1,12 +1,13 @@
 import requests
 
-url = "https://api.tvmaze.com/search/shows?q=breaking+bad"
+url = "https://api.tvmaze.com/search/shows?q=breaking"
 
 response = requests.get(url)
 print(f"Status Code: {response.status_code}")\
 
 if response.status_code == 200:
     shows = response.json()
+    print(shows)
     if shows:
         for show in shows:
             show_info = show.get('show', {})
@@ -14,7 +15,7 @@ if response.status_code == 200:
             print(f"Premiered: {show_info.get('premiered')}")
             print(f"Summary: {show_info.get('summary')}")
             print(f"Rating: {show_info.get('rating', {}).get('average')}")
-            print("-" * 40)
+            print("-" * 40) 
     else:
         print("No shows found for the query.")
 else:
